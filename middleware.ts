@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Protect admin API routes
-  if (pathname.startsWith('/api/admin')) {
+    if (pathname.startsWith('/api/admin') && pathname !== '/api/admin/login') {
     const auth = request.cookies.get('admin_auth')?.value
     if (auth !== process.env.ADMIN_PASSWORD) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
