@@ -3,11 +3,6 @@ import { supabaseAdmin } from '@/lib/supabase'
 import { sendStatusUpdate } from '@/lib/email'
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  // Verify admin cookie
-  const auth = req.cookies.get('admin_auth')?.value
-  if (auth !== process.env.ADMIN_PASSWORD) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
 
   const { status } = await req.json()
   if (!['confirmed', 'cancelled', 'pending'].includes(status)) {
