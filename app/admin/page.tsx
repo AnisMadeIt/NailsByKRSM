@@ -71,7 +71,7 @@ export default function AdminDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
     })
-    await loadBookings()
+    setBookings(prev => prev.map(b => b.id === id ? { ...b, status: status as any } : b))
     setUpdating(null)
   }
 
