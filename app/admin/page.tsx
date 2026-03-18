@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   const loadBookings = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/bookings', { credentials: 'include', cache: 'no-store' })
+      const res = await fetch(`/api/admin/bookings?t=${Date.now()}`, { credentials: 'include' })
       if (res.status === 401) { router.push('/admin/login'); return }
       const data = await res.json()
       setBookings(data.bookings || [])
